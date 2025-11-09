@@ -1,53 +1,39 @@
 import React from 'react';
-import { Home, CheckCircle, Users, BookOpen, FileText, LogOut } from 'lucide-react';
+import { Home, CheckSquare, Users, BarChart2 } from 'lucide-react';
 
-const navItems = [
+const NAV_ITEMS = [
   { key: 'Dashboard', label: 'Dashboard', icon: Home },
-  { key: 'Absensi', label: 'Absensi', icon: CheckCircle },
+  { key: 'Absensi', label: 'Absensi', icon: CheckSquare },
   { key: 'Siswa', label: 'Siswa', icon: Users },
-  { key: 'Kelas', label: 'Kelas', icon: BookOpen },
-  { key: 'Laporan', label: 'Laporan', icon: FileText },
+  { key: 'Laporan', label: 'Laporan', icon: BarChart2 },
 ];
 
-export default function Sidebar({ current, onSelect }) {
+export default function Sidebar({ current, onNavigate }) {
   return (
-    <aside className="hidden md:flex md:flex-col w-64 border-r bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 h-screen sticky top-0">
-      <div className="px-6 py-5 border-b">
-        <div className="flex items-center gap-2">
-          <div className="size-9 rounded-xl bg-blue-600 text-white grid place-items-center font-bold">AS</div>
-          <div>
-            <p className="font-semibold">Absensi Sekolah</p>
-            <p className="text-xs text-muted-foreground">SD | Admin Panel</p>
-          </div>
-        </div>
+    <aside className="h-full w-64 shrink-0 border-r border-gray-200 bg-white/80 backdrop-blur-sm">
+      <div className="px-4 py-5">
+        <div className="text-xl font-semibold tracking-tight">SekolahKu</div>
+        <div className="text-xs text-gray-500">Attendance System</div>
       </div>
-
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        {navItems.map(({ key, label, icon: Icon }) => {
+      <nav className="px-2 space-y-1">
+        {NAV_ITEMS.map(({ key, label, icon: Icon }) => {
           const active = current === key;
           return (
             <button
               key={key}
-              onClick={() => onSelect(key)}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+              onClick={() => onNavigate(key)}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-left ${
                 active
-                  ? 'bg-blue-600 text-white shadow'
-                  : 'hover:bg-blue-50 text-gray-700'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-gray-700 hover:bg-gray-100'
               }`}
             >
-              <Icon className="size-4" />
-              <span>{label}</span>
+              <Icon className="h-5 w-5" />
+              <span className="text-sm font-medium">{label}</span>
             </button>
           );
         })}
       </nav>
-
-      <div className="p-3 border-t">
-        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700">
-          <LogOut className="size-4" />
-          <span>Keluar</span>
-        </button>
-      </div>
     </aside>
   );
 }

@@ -1,57 +1,33 @@
 import React from 'react';
-import { Users, CheckCircle2, BookOpen, FileText } from 'lucide-react';
-
-const StatCard = ({ icon: Icon, label, value, trend }) => (
-  <div className="p-5 rounded-xl border bg-white shadow-sm">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm text-muted-foreground">{label}</p>
-        <p className="text-2xl font-semibold mt-1">{value}</p>
-      </div>
-      <div className="size-11 rounded-lg bg-blue-50 text-blue-600 grid place-items-center">
-        <Icon className="size-5" />
-      </div>
-    </div>
-    {trend && (
-      <p className="text-xs mt-3 text-emerald-600">{trend}</p>
-    )}
-  </div>
-);
+import { Users, CheckCircle2, XCircle, FileText } from 'lucide-react';
 
 export default function Dashboard() {
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-semibold">Dashboard</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Users} label="Total Siswa" value="324" trend="+12 siswa bulan ini" />
-        <StatCard icon={BookOpen} label="Jumlah Kelas" value="12" />
-        <StatCard icon={CheckCircle2} label="Kehadiran Hari Ini" value="298" trend="92% hadir" />
-        <StatCard icon={FileText} label="Laporan Bulan Ini" value="8" />
+        <StatCard icon={Users} label="Total Siswa" value="120" color="text-indigo-600" />
+        <StatCard icon={CheckCircle2} label="Hadir Hari Ini" value="108" color="text-emerald-600" />
+        <StatCard icon={XCircle} label="Tidak Hadir" value="12" color="text-rose-600" />
+        <StatCard icon={FileText} label="Laporan Bulan Ini" value="8" color="text-amber-600" />
       </div>
+      <div className="rounded-xl border border-gray-200 p-4 bg-white/70">
+        <h2 className="font-medium mb-2">Ringkasan</h2>
+        <p className="text-sm text-gray-600">Data ini akan terhubung ke basis data untuk menampilkan statistik nyata setelah penyimpanan permanen diaktifkan.</p>
+      </div>
+    </div>
+  );
+}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 p-5 rounded-xl border bg-white shadow-sm">
-          <h3 className="font-semibold mb-4">Ringkasan Kehadiran Mingguan</h3>
-          <div className="h-56 grid place-items-center text-muted-foreground">
-            <span>Grafik dummy — integrasi chart dapat ditambahkan nanti.</span>
-          </div>
-        </div>
-        <div className="p-5 rounded-xl border bg-white shadow-sm">
-          <h3 className="font-semibold mb-4">Kegiatan Terbaru</h3>
-          <ul className="space-y-3 text-sm">
-            <li className="flex items-center justify-between">
-              <span>Absensi Kelas 5A</span>
-              <span className="text-muted-foreground">07:45</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span>Tambah Siswa Baru</span>
-              <span className="text-muted-foreground">Kemarin</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span>Export Laporan</span>
-              <span className="text-muted-foreground">2 hari lalu</span>
-            </li>
-          </ul>
-        </div>
+function StatCard({ icon: Icon, label, value, color }) {
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white/70 p-4 flex items-center gap-3">
+      <div className={`h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center ${color}`}>
+        <Icon className="h-6 w-6" />
+      </div>
+      <div>
+        <div className="text-xs text-gray-500">{label}</div>
+        <div className="text-xl font-semibold">{value}</div>
       </div>
     </div>
   );

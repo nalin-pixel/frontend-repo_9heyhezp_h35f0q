@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
-import Sidebar from './components/Sidebar';
-import Topbar from './components/Topbar';
-import Dashboard from './components/Dashboard';
-import Attendance from './components/Attendance';
-import Students from './components/Students';
-import Reports from './components/Reports';
+import Sidebar from './components/Sidebar.jsx';
+import Topbar from './components/Topbar.jsx';
+import Dashboard from './components/Dashboard.jsx';
+import Attendance from './components/Attendance.jsx';
+import Students from './components/Students.jsx';
+import Reports from './components/Reports.jsx';
 
 const PAGES = {
-  Dashboard: <Dashboard />,
-  Absensi: <Attendance />,
-  Siswa: <Students />,
-  Laporan: <Reports />,
+  Dashboard: Dashboard,
+  Absensi: Attendance,
+  Siswa: Students,
+  Laporan: Reports,
 };
 
 export default function App() {
   const [page, setPage] = useState('Dashboard');
+  const PageComp = PAGES[page] || Dashboard;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-indigo-50 text-gray-900">
-      <div className="flex">
-        <Sidebar current={page} onSelect={setPage} />
-        <main className="flex-1 min-h-screen">
-          <Topbar title={page} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            {PAGES[page]}
+    <div className="h-screen w-screen overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900">
+      <div className="h-full flex">
+        <Sidebar current={page} onNavigate={setPage} />
+        <main className="flex-1 flex flex-col min-w-0">
+          <Topbar />
+          <div className="mx-auto max-w-7xl w-full flex-1 overflow-auto">
+            <PageComp />
           </div>
         </main>
       </div>
