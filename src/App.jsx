@@ -4,14 +4,12 @@ import Topbar from './components/Topbar';
 import Dashboard from './components/Dashboard';
 import Attendance from './components/Attendance';
 import Students from './components/Students';
-import Classes from './components/Classes';
 import Reports from './components/Reports';
 
 const PAGES = {
   Dashboard: <Dashboard />,
   Absensi: <Attendance />,
   Siswa: <Students />,
-  Kelas: <Classes />,
   Laporan: <Reports />,
 };
 
